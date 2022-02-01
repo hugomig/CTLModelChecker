@@ -1,1 +1,22 @@
-Salut !
+--STATES--
+S1
+S2
+S3
+S4
+S5
+S6
+--FUNCTIONS--
+S1 a b
+S2 b
+S3 a
+S4 b c
+S5 a b c
+S6 c
+--RELATIONS--
+S1 S2 S3
+S2 S4 S5
+S3 S3 S2 S1
+S4 S5
+S5 S6
+--INIT--
+S1

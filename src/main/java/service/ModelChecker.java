@@ -9,10 +9,8 @@ import main.java.models.KripkeStructure;
 public class ModelChecker {
 	
 	public static void main(String[] args) throws IOException {
-		System.out.println("Hello world!");
-		
-		read(args[0]);
-
+		KripkeStructure ks = read(args[0]);
+		System.out.println(ks);
 	}
 	
 	public static KripkeStructure read(String filename) throws IOException {
