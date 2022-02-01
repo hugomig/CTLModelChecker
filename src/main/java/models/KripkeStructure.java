@@ -100,6 +100,46 @@ public class KripkeStructure {
 		reader.close();
 	}
 	
+	public List<State> getChildrenOf(State s) {
+		List<State> children = new ArrayList<State>();
+		
+		if(relations.containsKey(states.get(states.indexOf(s)))) {
+			children.addAll(relations.get(states.get(states.indexOf(s))));
+		}
+		
+		return children;
+	}
+	
+	public List<State> getParentsOf(State s) {
+		List<State> parents = new ArrayList<State>();
+		
+		for(State verif: states) {
+			if(relations.containsKey(verif)) {
+				if(relations.get(verif).contains(s)) {
+					parents.add(verif);
+				}
+			}
+		}
+		
+		return parents;
+	}
+	
+	public List<State> getStates(){
+		return states;
+	}
+	
+	public Map<State, List<String>> getFunctions(){
+		return functions;
+	}
+	
+	public Map<State, List<State>> getRelations(){
+		return relations;
+	}
+	
+	public State getInitialState() {
+		return initialState;
+	}
+	
 	@Override
 	public String toString() {
 		return ("Kripke: ["
