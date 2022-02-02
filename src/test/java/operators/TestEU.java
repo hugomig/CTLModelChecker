@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import main.java.models.KripkeStructure;
 import main.java.models.State;
 import main.java.subformula.AP;
-import main.java.subformula.And;
 import main.java.subformula.CTLFormula;
 import main.java.subformula.EU;
 
@@ -19,17 +18,25 @@ class TestEU {
 	private CTLFormula formula;
 	
 	@Test
-	void EaUb1() {
+	void EbUcOnS1S2() {
 		ks = GenerateTestKripkeStructures.generate1();
-		formula = new EU(new AP("b"), new AP("b"));
-		assertEquals(formula.resolve(ks), Arrays.asList(new State[] { new State("S1")}));
+		formula = new EU(new AP("b"), new AP("c"));
+		assertEquals(formula.resolve(ks), Arrays.asList(new State[] { new State("S1"), new State("S2")}));
 	}
 	
 	@Test
-	void EaUc2() {
+	void EaUcOnNoOne() {
 		ks = GenerateTestKripkeStructures.generate2();
 		formula = new EU(new AP("a"), new AP("c"));
 		
 		assertEquals(formula.resolve(ks), Arrays.asList(new State[] { }));
+	}
+	
+	@Test
+	void EaUbOnS3S4WithLoop() {
+		ks = GenerateTestKripkeStructures.generate7();
+		formula = new EU(new AP("a"), new AP("b"));
+		
+		assertEquals(formula.resolve(ks), Arrays.asList(new State[] { new State("S3"), new State("S4")}));
 	}
 }
