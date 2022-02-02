@@ -6,11 +6,11 @@ import java.util.List;
 import main.java.models.KripkeStructure;
 import main.java.models.State;
 
-public class True implements CTLFormula {
+public class AP implements CTLFormula {
 	
 	private String function;
 	
-	public True(String function) {
+	public AP(String function) {
 		this.function = function;
 	}
 	

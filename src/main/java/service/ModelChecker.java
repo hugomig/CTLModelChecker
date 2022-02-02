@@ -18,10 +18,10 @@ public class ModelChecker {
 		CTLFormula formula = CTLFormulaReader.readFromFile(args[1]);
 		System.out.println(formula);
 		
-		checkIfKripkeVeryFormula(ks, formula);
+		checkIfKripkeVerifyFormula(ks, formula);
 	}
 	
-	public static void checkIfKripkeVeryFormula(KripkeStructure ks, CTLFormula formula) {
+	public static void checkIfKripkeVerifyFormula(KripkeStructure ks, CTLFormula formula) {
 		List<State> states = formula.resolve(ks);
 		
 		if(states.contains(ks.getInitialState())) {
