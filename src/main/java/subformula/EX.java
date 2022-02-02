@@ -15,7 +15,16 @@ public class EX implements CTLFormula{
 		
 		List<State> stateFormula = subFormula.resolve(ks);
 		
-		
+		for( State s : ks.getStates())
+		{
+			for(State q : ks.getAllSuccessor(s))
+			{
+				if(stateFormula.contains(q))
+				{
+					
+				}
+			}
+		}
 		
 		List<State> result = new ArrayList<State>();
 		return result;

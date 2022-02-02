@@ -1,6 +1,0 @@
-(NOT(a))OR((a)AND(NOT(c)))
-
-(a)AND(NOT(c))
-
-//Only the first line is readed
-(F(a))AND(N(NOT(q)))
