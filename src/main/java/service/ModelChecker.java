@@ -8,8 +8,6 @@ import java.util.List;
 import main.java.models.KripkeStructure;
 import main.java.models.State;
 import main.java.subformula.CTLFormula;
-import main.java.subformula.Not;
-import main.java.subformula.True;
 
 public class ModelChecker {
 	
@@ -17,16 +15,14 @@ public class ModelChecker {
 		KripkeStructure ks = KripkeStructureReader.readFromFile(args[0]);		
 		System.out.println(ks);
 		
-		True test = new True("a");
-		System.out.println(test.resolve(ks));
+		CTLFormula formula = CTLFormulaReader.readFromFile(args[1]);
+		System.out.println(formula);
 		
-		Not test2 = new Not(test);
-		System.out.println(test2.resolve(ks));
-		
-		CTLFormula verify = CTLFormulaReader.readFromFile(args[1]);
-		List<State> states = verify.resolve(ks);
-		
-		System.out.println(states);
+		checkIfKripkeVeryFormula(ks, formula);
+	}
+	
+	public static void checkIfKripkeVeryFormula(KripkeStructure ks, CTLFormula formula) {
+		List<State> states = formula.resolve(ks);
 		
 		if(states.contains(ks.getInitialState())) {
 			System.out.println("This Kripke Structure verifies this CTL formula");
