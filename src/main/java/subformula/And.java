@@ -31,4 +31,7 @@ public class And implements CTLFormula {
 		return result;
 	}
 	
+	public String toString() {
+		return "["+subFormula1+"] AND ["+subFormula2+"]";
+	}
 }

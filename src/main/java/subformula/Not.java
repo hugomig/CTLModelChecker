@@ -28,4 +28,9 @@ public class Not implements CTLFormula {
 		return verifies;
 	}
 	
+	@Override
+	public String toString() {
+		return "NOT["+formula+"]";
+	}
+	
 }

@@ -28,4 +28,9 @@ public class True implements CTLFormula {
 		
 		return verifies;
 	}
+	
+	@Override
+	public String toString() {
+		return "\""+function+"\"";
+	}
 }
