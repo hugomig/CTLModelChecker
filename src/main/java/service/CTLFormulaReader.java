@@ -9,7 +9,7 @@ import java.util.List;
 import main.java.subformula.And;
 import main.java.subformula.CTLFormula;
 import main.java.subformula.Not;
-import main.java.subformula.True;
+import main.java.subformula.AP;
 
 public class CTLFormulaReader {
 	
@@ -74,7 +74,7 @@ public class CTLFormulaReader {
 				}
 				throw new IOException("Error parsing "+textFormula+"\nThe formula "+operator+" is not implemented");
 			}
-			return new True(textFormula);
+			return new AP(textFormula);
 		}
 	}
 	
