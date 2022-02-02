@@ -68,5 +68,37 @@ public class KripkeStructure {
 			+ "\n\tInitial: " + initialState.toString()
 			+ "\n]");
 	}
+	
+	public List<State> getAllSuccessor(State s){
+		return getAllSuccessor(s, new ArrayList<State>());
+	}
+	
+	public List<State> getAllSuccessor(State s, List<State> successors)
+	{
+		List<State> allSuccessors = getChildrenOf(s);
+		for(State state: successors)
+		{
+			if(!allSuccessors.contains(state))
+			{
+				allSuccessors.add(state);
+			}
+		}
+		List<State> allSuccessorsCopy = new ArrayList<State>(allSuccessors);
+		for(State state: allSuccessorsCopy)
+		{
+			if(!successors.contains(state))
+			{
+				List<State> newSuccessors = getAllSuccessor(state, allSuccessors);
+				for(State newState: newSuccessors)
+				{
+					if(!allSuccessors.contains(newState))
+					{
+						allSuccessors.add(newState);
+					}
+				}
+			}
+		}
+		return allSuccessors;
+	}
 
 }
