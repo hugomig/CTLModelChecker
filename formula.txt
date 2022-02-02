@@ -1,3 +1,5 @@
+(NOT(a))OR((a)AND(NOT(c)))
+
 (a)AND(NOT(c))
 
 //Only the first line is readed

@@ -21,7 +21,7 @@ public class CTLFormulaReader {
 		return parse(textFormula);
 	}
 	
-	public static CTLFormula parse(String textFormula) {
+	public static CTLFormula parse(String textFormula) throws IOException {
 		List<String> subFormulas = new ArrayList<String>();
 		String operator = "";
 		
@@ -52,6 +52,12 @@ public class CTLFormulaReader {
 				operator += textFormula.charAt(i);
 			}
 		}
+		if(count < 0) {
+			throw new IOException("Error parsing formula "+textFormula+"\nToo much closing parenthesis");
+		}
+		else if (count > 0){
+			throw new IOException("Error parsing formula "+textFormula+"\nToo much opening parenthesis");
+		}
 		
 		System.out.println(operator);
 		System.out.println(subFormulas);
@@ -62,6 +68,12 @@ public class CTLFormulaReader {
 		case "AND":
 			return new And(parse(subFormulas.get(0)), parse(subFormulas.get(1)));
 		default:
+			if(subFormulas.size() > 0) {
+				if(operator.equals("")) {
+					throw new IOException("No operator detected outside parenthesis for "+textFormula+" check the parenthesis please");
+				}
+				throw new IOException("Error parsing "+textFormula+"\nThe formula "+operator+" is not implemented");
+			}
 			return new True(textFormula);
 		}
 	}
