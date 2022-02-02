@@ -24,7 +24,9 @@ public class EX implements CTLFormula{
 		for( State s : ks.getStates())
 		{
 			List<State> states = ks.getAllSuccessor(s);
-			states.add(s);
+			if(!states.contains(s)) {
+				states.add(s);
+			}
 			for(State q : states)
 			{
 				if(stateFormula.contains(q))
