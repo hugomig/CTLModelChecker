@@ -8,6 +8,7 @@ import java.util.List;
 
 import main.java.subformula.And;
 import main.java.subformula.CTLFormula;
+import main.java.subformula.EX;
 import main.java.subformula.Not;
 import main.java.subformula.Or;
 import main.java.subformula.AP;
@@ -70,6 +71,8 @@ public class CTLFormulaReader {
 			return new And(parse(subFormulas.get(0)), parse(subFormulas.get(1)));
 		case "OR":
 			return new Or(parse(subFormulas.get(0)), parse(subFormulas.get(1)));
+		case "EX":
+			return new EX(parse(subFormulas.get(0)));
 		default:
 			if(subFormulas.size() > 0) {
 				if(operator.equals("")) {

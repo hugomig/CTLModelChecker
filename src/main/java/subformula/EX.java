@@ -10,10 +10,16 @@ public class EX implements CTLFormula{
 	
 	private CTLFormula subFormula;
 
+	public EX(CTLFormula subFormula) 
+	{
+		this.subFormula = subFormula;
+	}
+
 	@Override
 	public List<State> resolve(KripkeStructure ks) {
 		
 		List<State> stateFormula = subFormula.resolve(ks);
+		List<State> result = new ArrayList<State>();
 		
 		for( State s : ks.getStates())
 		{
@@ -21,13 +27,15 @@ public class EX implements CTLFormula{
 			{
 				if(stateFormula.contains(q))
 				{
-					
+					result.add(s);
 				}
 			}
 		}
-		
-		List<State> result = new ArrayList<State>();
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		return "EX [" + subFormula + "]";
+	}
 }
