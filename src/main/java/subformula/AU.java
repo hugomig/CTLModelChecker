@@ -18,7 +18,6 @@ public class AU implements CTLFormula {
 
 	@Override
 	public List<State> resolve(KripkeStructure ks) {
-		// TODO Auto-generated method stub
 		List<State> stateFormula1 = subFormula1.resolve(ks);
 		List<State> stateFormula2 = subFormula2.resolve(ks);
 		
@@ -36,6 +35,7 @@ public class AU implements CTLFormula {
 		
 		return result;
 	}
+	
 	public boolean verify(State s, KripkeStructure ks, List<State> l1, List<State> l2, List<State> l1Copy)
 	{
 		if(l1Copy.contains(s))
@@ -43,15 +43,15 @@ public class AU implements CTLFormula {
 			l1Copy.remove(s);
 			for(State st : ks.getChildrenOf(s))
 			{	
-				 if(!l2.contains(st))
-				{
-					 return false;
-				}
 				if(l1.contains(st))
 				{
 					if(!verify(st, ks, l1, l2, l1Copy)) {
 						return false;
 					}
+				}
+				else if(!l2.contains(st))
+				{
+					 return false;
 				}
 			}
 		}

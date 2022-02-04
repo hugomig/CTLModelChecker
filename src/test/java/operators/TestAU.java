@@ -34,10 +34,10 @@ class TestAU {
 	
 	@Test
 	void AaUbOnS3S4WithLoop() {
-		ks = GenerateTestKripkeStructures.generate7();
+		ks = GenerateTestKripkeStructures.generate9();
 		formula = new AU(new AP("a"), new AP("b"));
 		
-		assertEquals(formula.resolve(ks), Arrays.asList(new State[] { }));
+		assertEquals(formula.resolve(ks), Arrays.asList(new State[] { new State("S1"), new State("S2")}));
 	}
 
 }

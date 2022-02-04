@@ -236,4 +236,30 @@ public class GenerateTestKripkeStructures {
 		
 		return new KripkeStructure(states, functions, relations, initialState);
 	}
+	
+	public static KripkeStructure generate9() {
+		List<State> states = new ArrayList<State>();
+		Map<State, List<String>> functions = new HashMap<State, List<String>>();
+		Map<State, List<State>> relations = new HashMap<State, List<State>>();
+		State initialState;
+		
+		State s1 = new State("S1");
+		State s2 = new State("S2");
+		State s3 = new State("S3");
+		
+		states.add(s1);
+		states.add(s2);
+		states.add(s3);
+		
+		functions.put(s1, Arrays.asList(new String[] {"a"}));
+		functions.put(s2, Arrays.asList(new String[] {"a"}));
+		functions.put(s3, Arrays.asList(new String[] {"b"}));
+		
+		relations.put(s1, Arrays.asList(new State[] {s2}));
+		relations.put(s2, Arrays.asList(new State[] {s3}));
+		
+		initialState = s1;
+		
+		return new KripkeStructure(states, functions, relations, initialState);
+	}
 }
