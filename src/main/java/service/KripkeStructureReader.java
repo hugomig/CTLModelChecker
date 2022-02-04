@@ -31,8 +31,18 @@ public class KripkeStructureReader {
 		//All the states (until we find line --Functions--)
 		line = reader.readLine();
 		while(line != null && !line.contains("--FUNCTIONS--")){
-			states.add(new State(line));
+			State newState = new State(line);
+			if(states.contains(newState)) {
+				reader.close();
+				throw new IOException("Error parsing --STATES-- : "+ line +"\nYou cannot have two states with the same name");
+			}
+			states.add(newState);
 			line = reader.readLine();
+		}
+		
+		if(states.size() < 1) {
+			reader.close();
+			throw new IOException("Error parsing kripke structure : You must have at least one state");
 		}
 
 		//All the functions (until we find line --Relations--)

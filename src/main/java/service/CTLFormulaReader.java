@@ -10,9 +10,14 @@ import main.java.subformula.And;
 import main.java.subformula.CTLFormula;
 import main.java.subformula.EU;
 import main.java.subformula.EF;
+import main.java.subformula.EG;
 import main.java.subformula.Not;
 import main.java.subformula.Or;
+import main.java.subformula.AF;
+import main.java.subformula.AG;
 import main.java.subformula.AP;
+import main.java.subformula.AU;
+import main.java.subformula.AX;
 
 public class CTLFormulaReader {
 	
@@ -56,14 +61,33 @@ public class CTLFormulaReader {
 			}
 		}
 		if(count < 0) {
-			throw new IOException("Error parsing formula "+textFormula+"\nToo much closing parenthesis");
+			throw new IOException("Error parsing formula "+textFormula+"\nMore closing parenthesis than opening ones");
 		}
 		else if (count > 0){
-			throw new IOException("Error parsing formula "+textFormula+"\nToo much opening parenthesis");
+			throw new IOException("Error parsing formula "+textFormula+"\nMore opening parenthesis than closing ones");
 		}
 		
-		System.out.println(operator);
-		System.out.println(subFormulas);
+		switch (operator) {
+		case "NOT":
+		case "EX":
+		case "EF":
+		case "EG":
+		case "AX":
+		case "AF":
+		case "AG":
+			if(subFormulas.size() != 1) {
+				throw new IOException("Error parsing formula : "+ textFormula+" incorect number of arguments for '"+operator+"', expected 1");
+			}
+			break;
+		case "AND":
+		case "OR":
+		case "EU":
+		case "AU":
+			if(subFormulas.size() != 2) {
+				throw new IOException("Error parsing formula : "+ textFormula+" incorect number of arguments for '"+operator+"', expected 2");
+			}
+			break;
+		}
 		
 		switch(operator) {
 		case "NOT":
@@ -76,6 +100,18 @@ public class CTLFormulaReader {
 			return new EF(parse(subFormulas.get(0)));
 		case "EU":
 			return new EU(parse(subFormulas.get(0)), parse(subFormulas.get(1)));
+		case "EF":
+			return new EF(parse(subFormulas.get(0)));
+		case "EG":
+			return new EG(parse(subFormulas.get(0)));
+		case "AX":
+			return new AX(parse(subFormulas.get(0)));
+		case "AU":
+			return new AU(parse(subFormulas.get(0)), parse(subFormulas.get(1)));
+		case "AF":
+			return new AF(parse(subFormulas.get(0)));
+		case "AG":
+			return new AG(parse(subFormulas.get(0)));
 		default:
 			if(subFormulas.size() > 0) {
 				if(operator.equals("")) {

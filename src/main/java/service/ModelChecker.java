@@ -16,7 +16,8 @@ public class ModelChecker {
 		System.out.println(ks);
 		
 		CTLFormula formula = CTLFormulaReader.readFromFile(args[1]);
-		System.out.println(formula);
+		System.out.println("Formula : "+formula);
+		System.out.println();
 		
 		checkIfKripkeVerifyFormula(ks, formula);
 	}
