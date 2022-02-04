@@ -6,33 +6,39 @@ import java.util.List;
 import main.java.models.KripkeStructure;
 import main.java.models.State;
 
-public class EX implements CTLFormula {
+public class EF implements CTLFormula{
 	
 	private CTLFormula subFormula;
 
-	public EX(CTLFormula subFormula) {
+	public EF(CTLFormula subFormula) 
+	{
 		this.subFormula = subFormula;
 	}
-	
+
 	@Override
 	public List<State> resolve(KripkeStructure ks) {
-		List<State> statesFormula = subFormula.resolve(ks);
+		
+		List<State> stateFormula = subFormula.resolve(ks);
 		List<State> result = new ArrayList<State>();
 		
-		for(State s: ks.getStates()) {
-			for(State q: ks.getChildrenOf(s)) {
-				if(statesFormula.contains(q)) {
-					result.add(s);
-					break;
+		for( State s : ks.getStates())
+		{
+			List<State> states = ks.getAllSuccessor(s);
+			for(State q : states)
+			{
+				if(stateFormula.contains(q))
+				{
+					if(!result.contains(s)) {
+						result.add(s);
+					}
 				}
 			}
 		}
-		
 		return result;
 	}
-	
-	public String toString() {
-		return "EX["+subFormula+"]";
-	}
 
+	@Override
+	public String toString() {
+		return "EF[" + subFormula + "]";
+	}
 }

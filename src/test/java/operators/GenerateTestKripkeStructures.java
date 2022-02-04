@@ -135,7 +135,7 @@ public class GenerateTestKripkeStructures {
 		functions.put(s3, Arrays.asList(new String[] {"c"}));
 		
 		relations.put(s1, Arrays.asList(new State[] {s2, s3}));
-		relations.put(s2, Arrays.asList(new State[] {s3}));
+		relations.put(s2, Arrays.asList(new State[] {s1}));
 		
 		initialState = s1;
 		

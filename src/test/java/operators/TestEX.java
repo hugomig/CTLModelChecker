@@ -18,27 +18,27 @@ class TestEX {
 	private CTLFormula formula;
 	
 	@Test
-	void EXAOnNoOne() {
-		ks = GenerateTestKripkeStructures.generate1();
-		formula = new EX(new AP("d"));
-		
-		assertEquals(formula.resolve(ks), Arrays.asList(new State[] {}));
-	}
-	
-	@Test
-	void EXAOnS1S2S3() {
-		ks = GenerateTestKripkeStructures.generate2();
+	void EXOnS1S2S3() {
+		ks = GenerateTestKripkeStructures.generate3();
 		formula = new EX(new AP("a"));
 		
 		assertEquals(formula.resolve(ks), Arrays.asList(new State[] {new State("S1"), new State("S2"), new State("S3")}));
 	}
 	
 	@Test
-	void EXBOnS3() {
+	void EXOnS3() {
+		ks = GenerateTestKripkeStructures.generate2();
+		formula = new EX(new AP("a"));
+		
+		assertEquals(formula.resolve(ks), Arrays.asList(new State[] {new State("S3")}));
+	}
+	
+	@Test
+	void EXOnNoOne() {
 		ks = GenerateTestKripkeStructures.generate3();
 		formula = new EX(new AP("b"));
 		
-		assertEquals(formula.resolve(ks), Arrays.asList(new State[] {new State("S3")}));
+		assertEquals(formula.resolve(ks), Arrays.asList(new State[] {}));
 	}
 
 }

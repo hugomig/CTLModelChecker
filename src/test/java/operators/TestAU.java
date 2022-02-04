@@ -11,7 +11,6 @@ import main.java.models.State;
 import main.java.subformula.AP;
 import main.java.subformula.AU;
 import main.java.subformula.CTLFormula;
-import main.java.subformula.EU;
 
 class TestAU {
 
