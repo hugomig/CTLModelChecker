@@ -198,4 +198,42 @@ public class GenerateTestKripkeStructures {
 		
 		return new KripkeStructure(states, functions, relations, initialState);
 	}
+	
+	public static KripkeStructure generate8() {
+		List<State> states = new ArrayList<State>();
+		Map<State, List<String>> functions = new HashMap<State, List<String>>();
+		Map<State, List<State>> relations = new HashMap<State, List<State>>();
+		State initialState;
+		
+		State s1 = new State("S1");
+		State s2 = new State("S2");
+		State s3 = new State("S3");
+		State s4 = new State("S4");
+		State s5 = new State("S5");
+		State s6 = new State("S6");
+		State s7 = new State("S7");
+		
+		states.add(s1);
+		states.add(s2);
+		states.add(s3);
+		states.add(s4);
+		states.add(s5);
+		states.add(s6);
+		states.add(s7);
+
+		functions.put(s1, Arrays.asList(new String[] {}));
+		functions.put(s2, Arrays.asList(new String[] {}));
+		functions.put(s5, Arrays.asList(new String[] {"a"}));
+		functions.put(s6, Arrays.asList(new String[] {"a"}));
+		functions.put(s7, Arrays.asList(new String[] {"a"}));
+		
+		relations.put(s1, Arrays.asList(new State[] {s2, s5}));
+		relations.put(s2, Arrays.asList(new State[] {s3, s6}));
+		relations.put(s3, Arrays.asList(new State[] {s4, s7}));
+		relations.put(s4, Arrays.asList(new State[] {s2}));
+		
+		initialState = s1;
+		
+		return new KripkeStructure(states, functions, relations, initialState);
+	}
 }
