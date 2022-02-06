@@ -12,10 +12,21 @@ import main.java.subformula.CTLFormula;
 public class ModelChecker {
 	
 	public static void main(String[] args) throws IOException {
-		KripkeStructure ks = KripkeStructureReader.readFromFile(args[0]);		
-		System.out.println(ks);
+		KripkeStructure ks;
+		CTLFormula formula;
 		
-		CTLFormula formula = CTLFormulaReader.readFromFile(args[1]);
+		if(args.length == 2) {
+			System.out.println("Kripke structure and formula readed from input files");
+			ks = KripkeStructureReader.readFromFile(args[0]);
+			formula = CTLFormulaReader.readFromFile(args[1]);
+		}
+		else {
+			System.out.println("Kripke structure and formula generated randomly");
+			ks = KripkeStructureRandomGenerator.generate();
+			formula = CTLFormulaRandomGenerator.generate(ks.getAllAP());
+		}
+		
+		System.out.println(ks);
 		System.out.println("Formula : "+formula);
 		System.out.println();
 		

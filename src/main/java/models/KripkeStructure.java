@@ -100,5 +100,21 @@ public class KripkeStructure {
 		}
 		return allSuccessors;
 	}
+	
+	public List<String> getAllAP(){
+		List<String> AP = new ArrayList<String>();
+		
+		for(State s: states) {
+			if(functions.containsKey(s)) {
+				for(String prop: functions.get(s)) {
+					if(!AP.contains(prop)) {
+						AP.add(prop);
+					}
+				}
+			}
+		}
+		
+		return AP;
+	}
 
 }
